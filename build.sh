@@ -12,5 +12,6 @@ done
 
 # Re-write the results doc
 
-mkdir -p out
+mkdir -p ./out
+touch ./out/.nojekyll
 python3 -c 'from aoc import utils;utils.print_outfile()'

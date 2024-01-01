@@ -1,18 +1,27 @@
+name: Advent of Code build
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+permissions:
+  contents: write
 
-on: [push]
   
 jobs:
   build:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Run days
+      - name: Check out my code 🎄
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Run edited apps and build HTML 🔧
         run: |
-          for d in `ls -1`; do
-            if [[ -e $d/app.py ]]; then
-              pushd $d
-              python app.py
-              popd
-            fi
-          done
+          ./build.sh
+      - name: Deploy to Pages 🚀
+        uses: JamesIves/github-pages-deploy-action@releases/v4
+        with:
+          branch: gh-pages
+          folder: out
