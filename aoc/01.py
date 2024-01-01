@@ -1,5 +1,8 @@
+from .utils import Utils
+u = Utils(__file__)
+
 total = 0
-with open('input.txt') as f:
+with open(f'{u.inbase}.txt') as f:
   for line in f.readlines():
     first = last = 0
     gotfirst = False
@@ -9,5 +12,7 @@ with open('input.txt') as f:
           last = int(c)
         else:
           first = last = int(c)
+          gotfirst = True
     total += (first*10) + last
-print(total)
+
+u.output(f'Calibration value sum: {total}')
