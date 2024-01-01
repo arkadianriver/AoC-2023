@@ -1,0 +1,11 @@
+steps:
+- uses: actions/checkout@v4
+- name: Run days
+  run: |
+    for d in `ls -1`; do
+      if [[ -e $d/app.py ]]; then
+        pushd $d
+        python app.py
+        popd
+      fi
+    done
