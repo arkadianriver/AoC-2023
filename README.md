@@ -22,3 +22,10 @@ be input and the output can be printed to a file, I have:
 I haven't looked ahead, so I don't yet know if this is a good organization; we'll see.
 
 Merry Christmas, 2023, and Happy New Year, 2024!
+
+<details>
+  <summary>Spoiler warning: link to my answers inside.</summary>
+  
+  Posted at https://arkadianriver.github.io/AoC-2023/ and of course in the source code in the `aoc` folder.
+  
+</details>
