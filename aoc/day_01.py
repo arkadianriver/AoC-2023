@@ -130,7 +130,7 @@ def _build_digit(line, c, pos, reverse=False):
 	'''returns digit for spelled digit if matched (and new position);
 	    otherwise, just returns the same character and position.
 			Using a data structure for the values so that I don't have to keep
-			retesting the condition, _is_digit, and return over and over'''
+			retyping the condition, _is_digit, and return over and over'''
 	map = {
 			'e': [('no', '1', 2), ('erht', '3', 4), ('vif', '5', 3), ('nin', '9', 3)],
 			'o': [('wt', '2', 2)], 'r': [('uof', '4', 3)], 'x': [('is', '6', 2)],
