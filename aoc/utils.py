@@ -66,7 +66,9 @@ def print_outfile():
 		day_n = importlib.import_module(f'..day_{day}', package='aoc.subpkg')
 		out += '<article class="day">'
 		out += markdown.markdown(day_n.__doc__)
-		out += f'<div class="my-solution"><h2>Day {day} solution</h2>\n<pre><code>'
+		out += f'<div class="my-solution"><h2>Day {day} solution</h2>\n'
+		out += f'<p><a href="https://github.com/arkadianriver/AoC-2023/blob/main/aoc/day_{day}.py">Link to the code</a>,'
+		out += 'with these results:</p><pre><code>'
 		with open(f'./aoc/day_{day}-results.txt', 'r') as f:
 			out += f.read()
 		out += '\n</code></pre></div>\n</article>\n'
