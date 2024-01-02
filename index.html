@@ -7,21 +7,81 @@
 	<style>
 	  @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300");
 	  body { margin:0;font-family:sans-serif;background-color:#303030;color:#e0e0e0 }
-		h1 { font-style:italic;font-weight:400;font-size:2.2rem;line-height:3.8rem }
-		h2 { font-size:1.2rem }
-		pre { background-color:#0f0f23;color:#cccccc;padding:1.2rem }
+		h1, h2, h3, h4 { font-weight:400 }
+		.doctitle { font-style:italic;font-size:2.4rem;line-height:3.8rem }
+		.day h1 { font-size:1.8rem }
+		.day { border:solid 1px gray;border-radius:1rem;padding:0.8rem }
+		pre { background-color:#0f0f23;color:#cccccc;padding:0.8rem 1.2rem;border-radius:0.6rem }
 		code { font-family:'Source Code Pro',monospace }
 		main { margin:20px; }
+		.my-solution { background-color:#464646;padding:0.4rem 0.8rem;border-radius:0.8rem }
 	</style>
 </head>
 <body>
 <main>
-<h1>The Advent of Code, 2023</h1>
-<h2>Day 01</h2>
+<h1 class="doctitle">The Advent of Code, 2023</h1>
+<article class="day"><h1>Day 01</h1>
+<p>The newly-improved calibration document consists of lines of text;
+each line originally contained a specific calibration value that the Elves now need to recover.
+On each line, the calibration value can be found by combining the first digit and the last digit
+(in that order) to form a single two-digit number.</p>
+<p>For example:</p>
+<pre><code>1abc2
+pqr3stu8vwx
+a1b2c3d4e5f
+treb7uchet
+</code></pre>
+<p>In this example, the calibration values of these four lines are 12, 38, 15, and 77.
+Adding these together produces 142.</p>
+<p>Consider your entire calibration document. What is the sum of all of the calibration values?</p>
+<h2>My thoughts</h2>
+<p>Seems pretty simple, so I want to do this the most generic way possible without
+using modules. It's the kind of thing I'd love to do in C if I actually remembered
+the language. Walking across each string, getting each character, saving the first
+and last and totalling them up at the end. Save memory by tallying them up as we
+go, and heck, only three reusable variables are needed, well.. and the flag to
+test when the first was found.</p>
+<h2><code>--- Part Two ---</code></h2>
+<p>Your calculation isn't quite right. It looks like some of the digits are actually spelled out
+with letters: one, two, three, four, five, six, seven, eight, and nine also count as valid "digits".</p>
+<p>Equipped with this new information, you now need to find the real first and last digit on each line.
+For example:</p>
+<pre><code>two1nine
+eightwothree
+abcone2threexyz
+xtwone3four
+4nineeightseven2
+zoneight234
+7pqrstsixteen
+</code></pre>
+<p>In this example, the calibration values are 29, 83, 13, 24, 42, 14, and 76.
+Adding these together produces 281.</p>
+<p>What is the sum of all of the calibration values?</p>
+<h2>My thoughts on Part Two</h2>
+<p>Okay, I didn't know there was a part two until solving part one.</p>
+<p>For part two, I could use <code>"".replace()</code> to substitute digits first and
+subsequently leave the rest of the logic the same.</p>
+<p>But, I think I'll try to do it in one pass first, changing the for loop
+to a while string-is-not-empty and a getchar function to inch forward
+char-by-char to see if it matches a digit, keeping the rest of the logic
+the same. Note that Python doesn't mutate strings, so I'll use the
+convention of a cursor, called 'pos' (to note the position in the string).</p>
+<p>I'll also break it up into functions so that we can:</p>
+<ul>
+<li>run either part 1 or part two</li>
+<li>preserve the first, last, total logic for either</li>
+</ul>
+<p>Okay, let's tweak that a bit because I read in a comment that <code>sevenine</code> would
+be considered 79 rather than 77. So, I'll do this differently. Instead of
+going from left to right all the way through, since we need only the first
+and last, I'll go from the left to get the first, then stop and go in from the right
+to get the last. That should do the trick. When coming in from the right, I'll spell
+the numbers in reverse.</p><div class="my-solution"><h2>Day 01 solution</h2>
 <pre><code># part 1:
   Calibration value sum: 55386
 # part two:
   Calibration value sum: 54824
 
-</code></pre>
+</code></pre></div>
+</article>
 </main></body></html>
