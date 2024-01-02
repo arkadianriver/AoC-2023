@@ -1,5 +1,5 @@
 """
-# Advent day 01
+# Day 01
 
 The newly-improved calibration document consists of lines of text;
 each line originally contained a specific calibration value that the Elves now need to recover.
@@ -8,10 +8,10 @@ On each line, the calibration value can be found by combining the first digit an
 
 For example:
 
-		1abc2
-		pqr3stu8vwx
-		a1b2c3d4e5f
-		treb7uchet
+	1abc2
+	pqr3stu8vwx
+	a1b2c3d4e5f
+	treb7uchet
 
 In this example, the calibration values of these four lines are 12, 38, 15, and 77.
 Adding these together produces 142.
@@ -27,7 +27,7 @@ and last and totalling them up at the end. Save memory by tallying them up as we
 go, and heck, only three reusable variables are needed, well.. and the flag to
 test when the first was found.
 
-## Part Two
+## `--- Part Two ---`
 
 Your calculation isn't quite right. It looks like some of the digits are actually spelled out
 with letters: one, two, three, four, five, six, seven, eight, and nine also count as valid "digits".
@@ -35,13 +35,13 @@ with letters: one, two, three, four, five, six, seven, eight, and nine also coun
 Equipped with this new information, you now need to find the real first and last digit on each line.
 For example:
 
-		two1nine
-		eightwothree
-		abcone2threexyz
-		xtwone3four
-		4nineeightseven2
-		zoneight234
-		7pqrstsixteen
+	two1nine
+	eightwothree
+	abcone2threexyz
+	xtwone3four
+	4nineeightseven2
+	zoneight234
+	7pqrstsixteen
 
 In this example, the calibration values are 29, 83, 13, 24, 42, 14, and 76.
 Adding these together produces 281.
@@ -52,8 +52,8 @@ What is the sum of all of the calibration values?
 
 Okay, I didn't know there was a part two until solving part one.
 
-For part two, I could use "".replace() to substitute digits first and
-subsequently leave the rest of the logic the same
+For part two, I could use `"".replace()` to substitute digits first and
+subsequently leave the rest of the logic the same.
 
 But, I think I'll try to do it in one pass first, changing the for loop
 to a while string-is-not-empty and a getchar function to inch forward
@@ -62,15 +62,16 @@ the same. Note that Python doesn't mutate strings, so I'll use the
 convention of a cursor, called 'pos' (to note the position in the string).
 
 I'll also break it up into functions so that we can:
+
 - run either part 1 or part two
 - preserve the first, last, total logic for either
 
-Okay, re-think that because I read in a comment that `sevenine` would
+Okay, let's tweak that a bit because I read in a comment that `sevenine` would
 be considered 79 rather than 77. So, I'll do this differently. Instead of
 going from left to right all the way through, since we need only the first
-and last, I'll go from the left to get the first and go in from the right
-to get the last. That should do the trick. I'll spell the numbers in reverse
-coming in from the right.
+and last, I'll go from the left to get the first, then stop and go in from the right
+to get the last. That should do the trick. When coming in from the right, I'll spell
+the numbers in reverse.
 
 """
 

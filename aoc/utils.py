@@ -46,23 +46,30 @@ def print_outfile():
 	<style>
 	  @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300");
 	  body { margin:0;font-family:sans-serif;background-color:#303030;color:#e0e0e0 }
-		h1 { font-style:italic;font-weight:400;font-size:2.2rem;line-height:3.8rem }
-		h2 { font-size:1.2rem }
-		pre { background-color:#0f0f23;color:#cccccc;padding:1.2rem }
+		h1, h2, h3, h4 { font-weight:400 }
+		.doctitle { font-style:italic;font-size:2.4rem;line-height:3.8rem }
+		.day h1 { font-size:1.8rem }
+		.day { border:solid 1px gray;border-radius:1rem;padding:0.8rem }
+		pre { background-color:#0f0f23;color:#cccccc;padding:0.8rem 1.2rem;border-radius:0.6rem }
 		code { font-family:'Source Code Pro',monospace }
 		main { margin:20px; }
+		.my-solution { background-color:#464646;padding:0.4rem 0.8rem;border-radius:0.8rem }
 	</style>
 </head>
 <body>
 <main>
-<h1>The Advent of Code, 2023</h1>
+<h1 class="doctitle">The Advent of Code, 2023</h1>
 '''
+	import importlib, markdown
 	days = days_completed()
 	for day in days:
-		out += f"<h2>Day {day}</h2>\n<pre><code>"
+		day_n = importlib.import_module(f'..day_{day}', package='aoc.subpkg')
+		out += '<article class="day">'
+		out += markdown.markdown(day_n.__doc__)
+		out += f'<div class="my-solution"><h2>Day {day} solution</h2>\n<pre><code>'
 		with open(f'./aoc/day_{day}-results.txt', 'r') as f:
 			out += f.read()
-		out += '\n</code></pre>\n'
+		out += '\n</code></pre></div>\n</article>\n'
 	out += '</main></body></html>'
 	with open('./out/index.html', 'w', encoding='utf-8') as of:
 		of.write(out)
