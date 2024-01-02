@@ -19,6 +19,7 @@ jobs:
           persist-credentials: false
       - name: Run edited apps and build HTML 🔧
         run: |
+          pip install markdown
           ./build.sh
       - name: Deploy to Pages 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v4
