@@ -47,6 +47,7 @@ def print_outfile():
 	  @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300");
 	  body { margin:0;font-family:sans-serif;background-color:#303030;color:#e0e0e0 }
 		h1, h2, h3, h4 { font-weight:400 }
+  		a { text-decoration:none;color:#ccccff;font-weight:600 }
 		.doctitle { font-style:italic;font-size:2.4rem;line-height:3.8rem }
 		.day h1 { font-size:1.8rem }
 		.day { border:solid 1px gray;border-radius:1rem;padding:0.8rem }
@@ -66,9 +67,9 @@ def print_outfile():
 		day_n = importlib.import_module(f'..day_{day}', package='aoc.subpkg')
 		out += '<article class="day">'
 		out += markdown.markdown(day_n.__doc__)
-		out += f'<div class="my-solution"><h2>Day {day} solution</h2>\n'
-		out += f'<p><a href="https://github.com/arkadianriver/AoC-2023/blob/main/aoc/day_{day}.py">Link to the code</a>,'
-		out += 'with these results:</p><pre><code>'
+		out += f'<div class="my-solution"><h2>Day {day} solution '
+		out += f'(<a target="_blank" href="https://github.com/arkadianriver/AoC-2023/blob/main/aoc/day_{day}.py">see the code</a>)</h2>\n'
+		out += '<pre><code>'
 		with open(f'./aoc/day_{day}-results.txt', 'r') as f:
 			out += f.read()
 		out += '\n</code></pre></div>\n</article>\n'
