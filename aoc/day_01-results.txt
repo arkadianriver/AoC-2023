@@ -1,0 +1,4 @@
+# part 1:
+  Calibration value sum: 55386
+# part two:
+  Calibration value sum: 54824

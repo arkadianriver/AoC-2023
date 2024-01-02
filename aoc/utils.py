@@ -6,18 +6,25 @@ class Utils():
 	def __init__(self, filename):
 		self.filename = filename
 		self.dp0 = os.path.dirname(os.path.realpath(filename))
-		self.a_day = os.path.splitext(os.path.basename(filename))[0]
-		self.inbase = f'{self.dp0}/{self.a_day}-input'
+		self.a_day = os.path.splitext(os.path.basename(filename))[0][4:6]
+		self.inbase = f'{self.dp0}/day_{self.a_day}-input'
+		self.output = ''
 
-	def output(self, result):
-		with open(f'{self.dp0}/{self.a_day}-results.txt', 'w', encoding='utf-8') as of:
-			of.write(result)
+	def store_content(self, content):
+		self.output += content
+
+	def report(self, debug=False):
+		if debug:
+			print(self.output)
+		else:
+			with open(f'{self.dp0}/day_{self.a_day}-results.txt', 'w', encoding='utf-8') as of:
+				of.write(self.output)
 
 def list_changed():
 	result = subprocess.run('git diff --name-only HEAD^ HEAD', shell=True, capture_output=True, text=True)
 	days = {}
 	for line in result.stdout.split('\n'):
-		m = re.search(r'aoc/(\d\d)', line)
+		m = re.search(r'aoc/day_(\d\d)', line)
 		if m:
 			days[m.group(1)] = True
 	print(" ".join(days.keys()))
@@ -26,7 +33,7 @@ def days_completed():
 	days = []
 	for file in os.listdir('aoc'):
 		if 'results' in file:
-			days.append(file[:2])
+			days.append(file[4:6]) # day_[..].*
 	return days
 
 def print_outfile():
@@ -53,7 +60,7 @@ def print_outfile():
 	days = days_completed()
 	for day in days:
 		out += f"<h2>Day {day}</h2>\n<pre><code>"
-		with open(f'./aoc/{day}-results.txt', 'r') as f:
+		with open(f'./aoc/day_{day}-results.txt', 'r') as f:
 			out += f.read()
 		out += '\n</code></pre>\n'
 	out += '</main></body></html>'
